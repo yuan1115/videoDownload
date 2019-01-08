@@ -37,14 +37,14 @@
 * 更多用法参照[官网](https://you-get.org/)，或参照 github [这里](https://github.com/soimort/you-get)
 
 ##### you-get参数列表(文档简略翻译，具体请以官方文档为准)
-######可选参数:
+###### 可选参数:
     -V, --version               打印版本并退出                                   
     -h, --help                  打印帮助信息并退出
-######查看视频信息:(不会下载)
+###### 查看视频信息:(不会下载)
     -i, --info                  打印视频信息                                     
     -u, --url                   使用URL打印提取的信息                          
     --json                      以JSON格式打印提取的URL
-######下载参数:
+###### 下载参数:
     -n, --no-merge              不要合并视频部分                               
     --no-caption                不要下载字幕（字幕，歌词，danmaku)
     -f, --force                 强制覆盖现有文件
@@ -59,14 +59,14 @@
     -P PASSWORD, --password     将视频访问密码设置为PASSWORD
     -l, --playlist              下载播放列表
     -a, --auto-rename           自动重命名相同名称的不同文件
-######代理参数:
+###### 代理参数:
     -x HOST:PORT,--http-proxy      使用HTTP代理进行下载                         
     -y HOST:PORT,--extractor-proxy 使用HTTP代理仅提取
     --no-proxy                     永远不要使用代理
     -s HOST:PORT, --socks-proxy    你们科学上网是需要这个参数，除非开全局
 
 ### youtube-dl参数列表(文档简略翻译，具体请以官方文档为准)
-######通用选项:
+###### 通用选项:
     -h, --help                       打印帮助文档
     --version                        打印版本信息
     -U, --update                     更新到最新版(需要权限)
@@ -84,20 +84,20 @@
     --no-mark-watched                不标记看过此视频 (YouTube only)
     --no-color                       打印到屏幕上的代码不带色
 
-######网络选项:
+###### 网络选项:
     --proxy URL                      使用HTTP/HTTPS/SOCKS协议的代理.如：socks5://127.0.0.1:1080/.
     --socket-timeout SECONDS         放弃连接前等待时间
     --source-address IP              绑定的客户端IP地址
     -4, --force-ipv4                 所有连接通过IPv4
     -6, --force-ipv6                 所有连接通过IPv6
 
-######地理限制:
+###### 地理限制:
     --geo-verification-proxy URL     使用此代理地址测试一些有地理限制的地址
     --geo-bypass                     绕过地理限制通过伪装X-Forwarded-For HTTP头部的客户端ip (实验)
     --no-geo-bypass                  不 绕过地理限制通过伪装X-Forwarded-For HTTP头部的客户端ip (实验)
     --geo-bypass-country CODE        强制绕过地理限制通过提供准确的ISO 3166-2标准的国别代码(实验) 注：以上三个实验参数实测未成功
 
-######视频选择:
+###### 视频选择:
     --playlist-start NUMBER          指定列表中开始下载的视频(默认为1)
     --playlist-end NUMBER            指定列表中结束的视频(默认为last)
     --playlist-items ITEM_SPEC       指定列表中要下载的视频项目编号.如："--playlist-items 1,2,5,8"或"--playlist-items 1-3,7,10-13"
@@ -118,7 +118,7 @@
     --download-archive FILE          仅下载档案文件中未列出的影片，已下载的记录ID
     --include-ads                    同时下载广告(实验)
 
-######下载选项:
+###### 下载选项:
     -r, --limit-rate RATE            最大bps (e.g. 50K or 4.2M)
     -R, --retries RETRIES            重试次数 (默认10), or "infinite".
     --fragment-retries RETRIES       一个分段的最大重试次数(default is 10), or "infinite" (DASH, hlsnative and ISM)
@@ -136,7 +136,7 @@
     --external-downloader COMMAND    使用指定的第三方下载工具,当前支持：aria2c,avconv,axel,curl,ffmpeg,httpie,wget
     --external-downloader-args ARGS  给第三方下载工具指定参数，如：--external-downloader aria2c --external-downloader-args -j8
 
-######文件系统选项:
+###### 文件系统选项:
     -a, --batch-file FILE            文件中包含需要下载的URL
     --id                             仅使用文件名中的视频ID
     -o, --output TEMPLATE            Output filename template, see the "OUTPUT TEMPLATE" for all the info
@@ -156,12 +156,12 @@
     --no-cache-dir                   不用缓存
     --rm-cache-dir                   删除所有缓存文件
 
-######缩略图:
+###### 缩略图:
     --write-thumbnail                把缩略图写入硬盘
     --write-all-thumbnails           将所有缩略图写入磁盘
     --list-thumbnails                列出所有可用的缩略图格式
 
-######详细/模拟选项:
+###### 详细/模拟选项:
     -q, --quiet                      激活退出模式
     --no-warnings                    忽略警告
     -s, --simulate                   不下载不存储任何文件到硬盘，模拟下载模式
@@ -187,7 +187,7 @@
     -C, --call-home                  联系youtube-dl服务器进行调试
     --no-call-home                   不联系youtube-dl服务器进行调试
 
-######解决方法:
+###### 解决方法:
     --encoding ENCODING              强制指定编码(实验)
     --no-check-certificate           禁止HTTPS证书验证
     --prefer-insecure                使用未加密的连接来检索有关视频的信息(目前仅支持YouTube)
@@ -198,7 +198,7 @@
     --sleep-interval SECONDS         在每次下载之前休眠的秒数，或者每次下载之前的随机睡眠的范围的下限(最小可能的睡眠秒数)与-max-sleep-interval一起使用。
     --max-sleep-interval SECONDS     每次下载前随机睡眠范围的上限(最大可能睡眠秒数)。只能与--min-sleep-interval一起使用。
 
-######视频格式选项:
+###### 视频格式选项:
     -f, --format FORMAT              视频格式代码,查看"FORMAT SELECTION"获取所有信息
     --all-formats                    获取所有视频格式
     --prefer-free-formats            开源的视频格式优先，除非有特定的请求
@@ -206,7 +206,7 @@
     --youtube-skip-dash-manifest     不要下载关于YouTube视频的DASH清单和相关数据
     --merge-output-format FORMAT     如果需要合并(例如bestvideo + bestaudio)，则输出到给定的容器格式。mkv，mp4，ogg，webm，flv之一。如果不需要合并，则忽略
 
-######字幕选项:
+###### 字幕选项:
     --write-sub                      下载字幕文件
     --write-auto-sub                 下载自动生成的字幕文件 (YouTube only)
     --all-subs                       下载所有可用的字幕
@@ -214,20 +214,20 @@
     --sub-format FORMAT              字幕格式,接受格式偏好,如："srt" or "ass/srt/best"
     --sub-lang LANGS                 要下载的字幕的语言(可选)用逗号分隔,请使用--list-subs表示可用的语言标签
 
-######验证选项:
+###### 验证选项:
     -u, --username USERNAME          使用ID登录
     -p, --password PASSWORD          账户密码,如果此选项未使用,youtube-dl将交互式地询问。
     -2, --twofactor TWOFACTOR        双因素认证码
     -n, --netrc                      使用.netrc认证数据
     --video-password PASSWORD        视频密码(vimeo, smotri, youku)
 
-######Adobe Pass Options:
+###### Adobe Pass Options:
     --ap-mso MSO                     Adobe Pass多系统运营商(电视提供商)标识符,使用--ap-list-mso列出可用的MSO
     --ap-username USERNAME           MSO账号登录
     --ap-password PASSWORD           账户密码,如果此选项未使用,youtube-dl将交互式地询问。
     --ap-list-mso                    列出所有支持的MSO
 
-######后处理选项:
+###### 后处理选项:
     -x, --extract-audio              将视频文件转换为纯音频文件(需要ffmpeg或avconv和ffprobe或avprobe)
     --audio-format FORMAT            指定音频格式: "best", "aac", "flac", "mp3", "m4a", "opus", "vorbis", or "wav"; "best" by default;-x存在时无效
     --audio-quality QUALITY          指定ffmpeg/avconv音频质量,为VBR插入一个0(best)-9(worse)的值(默认5),或者指定比特率
