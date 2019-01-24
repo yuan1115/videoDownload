@@ -1,11 +1,11 @@
 ### 视频下载软件
-    视频下载软件
+    视频下载软件（youtubedl分别从命令行模式和作为一个伪pythoner的倔强模式）
 
 #### 目录结构
     |- code                   源码
-        |- batch              批处理 
-        |- python-code        python脚本 
-        |- python-gui-code    python Gui
+        |- batch              批处理           （youtub-dl/you-get命令行模式）
+        |- python-code        python脚本             
+        |- python-gui-code    python Gui         
     |- gui                    打包完成的gui 
     |- support                一些支持
         |- ffmpeg             视屏处理
