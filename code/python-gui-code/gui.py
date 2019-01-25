@@ -2,7 +2,7 @@
 # @Author: jmx
 # @Date:   2019-01-08 17:45:36
 # @Last Modified by:   jmx
-# @Last Modified time: 2019-01-22 17:47:52
+# @Last Modified time: 2019-01-25 13:34:09
 # -*- coding: utf-8 -*-
 
 ###########################################################################
@@ -17,50 +17,157 @@ import webbrowser
 import wx.xrc
 import wx.grid
 import images
+from os import system, getcwd, path, mkdir
 
 ###########################################################################
 # Class MyFrame1
 ###########################################################################
 
 
-class MyFrame1 (wx.Frame):
+class mainFrame (wx.Frame):
 
     def __init__(self, parent):
-        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title='视频下载', pos=wx.DefaultPosition, size=wx.Size(
-            611, 448), style=wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.TAB_TRAVERSAL)
+        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"下载工具", pos=wx.DefaultPosition, size=wx.Size(
+            858, 511), style=wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.TAB_TRAVERSAL)
 
         self.SetSizeHintsSz(wx.DefaultSize, wx.DefaultSize)
         self.SetBackgroundColour(
-            wx.SystemSettings.GetColour(wx.SYS_COLOUR_INACTIVEBORDER))
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_MENU))
         self.SetIcon(images.AppIcon.GetIcon())
-        bSizer1 = wx.BoxSizer(wx.VERTICAL)
 
-        bSizer3 = wx.BoxSizer(wx.VERTICAL)
+        mainbSizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.m_staticText1 = wx.StaticText(
+        actionbSizer = wx.BoxSizer(wx.VERTICAL)
+
+        name_radioBoxChoices = [u"按名称命名", u"按id命名", u"按链接命名", u"按名称+id命名"]
+        self.name_radioBox = wx.RadioBox(
+            self, wx.ID_ANY, u"输出文件名格式", wx.DefaultPosition, wx.DefaultSize, name_radioBoxChoices, 1, wx.RA_SPECIFY_ROWS)
+        self.name_radioBox.SetSelection(3)
+        actionbSizer.Add(self.name_radioBox, 0, wx.ALL | wx.EXPAND, 5)
+
+        format_radioBoxChoices = [u"默认最佳", u"1080P", u"720", u"480", u"360"]
+        self.format_radioBox = wx.RadioBox(
+            self, wx.ID_ANY, u"视频分辨率", wx.DefaultPosition, wx.DefaultSize, format_radioBoxChoices, 1, wx.RA_SPECIFY_ROWS)
+        self.format_radioBox.SetSelection(0)
+        actionbSizer.Add(self.format_radioBox, 0, wx.ALL | wx.EXPAND, 5)
+
+        m_radioBoxChoices = [u"是", u"否"]
+        self.m_radioBox = wx.RadioBox(self, wx.ID_ANY, u"视频音频是否合成", wx.DefaultPosition,
+                                      wx.DefaultSize, m_radioBoxChoices, 1, wx.RA_SPECIFY_ROWS)
+        self.m_radioBox.SetSelection(0)
+        actionbSizer.Add(self.m_radioBox, 0, wx.ALL | wx.EXPAND, 5)
+
+        selebSizer = wx.BoxSizer(wx.HORIZONTAL)
+
+        self.seleTime_checkBox = wx.CheckBox(
+            self, wx.ID_ANY, u"按上传时间筛选：", wx.DefaultPosition, wx.DefaultSize, 0)
+        selebSizer.Add(self.seleTime_checkBox, 0, wx.ALL, 5)
+
+        self.m_textCtrl4 = wx.TextCtrl(
+            self, wx.ID_ANY, u"7", wx.DefaultPosition, wx.Size(40, -1), wx.TE_CENTRE)
+        selebSizer.Add(self.m_textCtrl4, 0, 0, 5)
+
+        self.day_staticText = wx.StaticText(
+            self, wx.ID_ANY, u"天", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.day_staticText.Wrap(-1)
+        selebSizer.Add(self.day_staticText, 0, wx.ALL, 5)
+
+        self.m_staticline3 = wx.StaticLine(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL | wx.LI_VERTICAL)
+        selebSizer.Add(self.m_staticline3, 0, wx.EXPAND | wx.ALL, 5)
+
+        self.seleSize_checkBox = wx.CheckBox(
+            self, wx.ID_ANY, u"按照文件大小筛选：", wx.DefaultPosition, wx.DefaultSize, 0)
+        selebSizer.Add(self.seleSize_checkBox, 0, wx.ALL, 5)
+
+        self.limitSize_textCtrl = wx.TextCtrl(
+            self, wx.ID_ANY, u"100", wx.DefaultPosition, wx.Size(40, -1), wx.TE_CENTRE)
+        selebSizer.Add(self.limitSize_textCtrl, 0, 0, 5)
+
+        self.du_staticText = wx.StaticText(
+            self, wx.ID_ANY, u"M", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.du_staticText.Wrap(-1)
+        selebSizer.Add(self.du_staticText, 0, wx.ALL, 5)
+
+        actionbSizer.Add(selebSizer, 0, wx.ALL | wx.EXPAND, 5)
+
+        threadbSizer = wx.BoxSizer(wx.HORIZONTAL)
+
+        self.open_checkBox = wx.CheckBox(
+            self, wx.ID_ANY, u"多进程下载", wx.DefaultPosition, wx.DefaultSize, 0)
+        threadbSizer.Add(self.open_checkBox, 0, wx.ALL, 5)
+
+        self.thread_staticText = wx.StaticText(
+            self, wx.ID_ANY, u"进程数：", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.thread_staticText.Wrap(-1)
+        threadbSizer.Add(self.thread_staticText, 0, wx.ALL, 5)
+
+        self.m_textCtrl41 = wx.TextCtrl(
+            self, wx.ID_ANY, u"4", wx.DefaultPosition, wx.Size(40, -1), wx.TE_CENTRE)
+        self.m_textCtrl41.SetMaxLength(2)
+        threadbSizer.Add(self.m_textCtrl41, 0, 0, 5)
+
+        self.du_staticText = wx.StaticText(
+            self, wx.ID_ANY, u"个", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.du_staticText.Wrap(-1)
+        threadbSizer.Add(self.du_staticText, 0, wx.ALL, 5)
+
+        self.m_staticText6 = wx.StaticText(
+            self, wx.ID_ANY, u"（最多填16）", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_staticText6.Wrap(-1)
+        threadbSizer.Add(self.m_staticText6, 0, wx.ALL, 5)
+
+        actionbSizer.Add(threadbSizer, 0, wx.ALL | wx.EXPAND, 5)
+
+        mainbSizer.Add(actionbSizer, 2, wx.ALL | wx.EXPAND, 5)
+
+        self.m_staticline2 = wx.StaticLine(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL | wx.LI_VERTICAL)
+        self.m_staticline2.SetForegroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_BACKGROUND))
+        self.m_staticline2.SetBackgroundColour(
+            wx.SystemSettings.GetColour(wx.SYS_COLOUR_BACKGROUND))
+
+        mainbSizer.Add(self.m_staticline2, 0, wx.ALL | wx.EXPAND, 10)
+
+        link_bSizer = wx.BoxSizer(wx.VERTICAL)
+
+        linkbSizer = wx.BoxSizer(wx.VERTICAL)
+
+        self.tips_staticText = wx.StaticText(
             self, wx.ID_ANY, u"链接格式：一条一行", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.m_staticText1.Wrap(-1)
-        bSizer3.Add(self.m_staticText1, 0, wx.ALL, 5)
+        self.tips_staticText.Wrap(-1)
+        linkbSizer.Add(self.tips_staticText, 0, wx.ALL, 5)
 
-        self.m_textCtrl1 = wx.TextCtrl(
-            self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(-1, 280), wx.HSCROLL | wx.TE_MULTILINE)
-        bSizer3.Add(self.m_textCtrl1, 0, wx.ALL | wx.EXPAND, 5)
+        self.link_textCtrl = wx.TextCtrl(
+            self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(-1, 350), 0)
+        linkbSizer.Add(self.link_textCtrl, 0, wx.ALL | wx.EXPAND, 5)
 
-        bSizer1.Add(bSizer3, 2, wx.ALL | wx.EXPAND, 5)
+        link_bSizer.Add(linkbSizer, 5, wx.EXPAND, 5)
 
-        bSizer2 = wx.BoxSizer(wx.HORIZONTAL)
+        bntbSizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.download = wx.Button(
-            self, wx.ID_ANY, u"点击下载", wx.DefaultPosition, wx.DefaultSize, 0)
-        bSizer2.Add(self.download, 0, wx.ALIGN_RIGHT | wx.ALL, 5)
+        self.start_button = wx.Button(
+            self, wx.ID_ANY, u"开始下载", wx.DefaultPosition, wx.Size(-1, -1), wx.BU_EXACTFIT)
+        bntbSizer.Add(self.start_button, 0, wx.ALL, 5)
 
-        self.look = wx.Button(self, wx.ID_ANY, u"查看支持链接",
-                              wx.DefaultPosition, wx.DefaultSize, 0)
-        bSizer2.Add(self.look, 0, wx.ALIGN_RIGHT | wx.ALL, 5)
+        self.stop_button = wx.Button(
+            self, wx.ID_ANY, u"结束进程", wx.DefaultPosition, wx.Size(-1, -1), wx.BU_EXACTFIT)
+        bntbSizer.Add(self.stop_button, 0, wx.ALL, 5)
 
-        bSizer1.Add(bSizer2, 1, wx.ALIGN_CENTER | wx.ALL | wx.EXPAND, 5)
+        self.lookfile_button = wx.Button(
+            self, wx.ID_ANY, u"下载目录", wx.DefaultPosition, wx.Size(-1, -1), wx.BU_EXACTFIT)
+        bntbSizer.Add(self.lookfile_button, 0, wx.ALL, 5)
 
-        self.SetSizer(bSizer1)
+        self.lookplat_button = wx.Button(
+            self, wx.ID_ANY, u"支持平台", wx.DefaultPosition, wx.Size(-1, -1), wx.BU_EXACTFIT)
+        bntbSizer.Add(self.lookplat_button, 1, wx.ALL, 5)
+
+        link_bSizer.Add(bntbSizer, 1, wx.ALL | wx.EXPAND, 5)
+
+        mainbSizer.Add(link_bSizer, 2, wx.ALL | wx.EXPAND, 5)
+
+        self.SetSizer(mainbSizer)
         self.Layout()
         self.statusbar = self.CreateStatusBar()
         self.statusbar.SetFieldsCount(3)
@@ -72,14 +179,20 @@ class MyFrame1 (wx.Frame):
 
         self.Centre(wx.BOTH)
 
-        # Connect Events
-        self.download.Bind(wx.EVT_BUTTON, self.download_even)
-        self.look.Bind(wx.EVT_BUTTON, self.look_even)
+        self.start_button.Bind(wx.EVT_BUTTON, self.download_even)
+        self.stop_button.Bind(wx.EVT_BUTTON, self.endthr_even)
+        self.lookfile_button.Bind(wx.EVT_BUTTON, self.lookfile_even)
+        self.lookplat_button.Bind(wx.EVT_BUTTON, self.lookplat_even)
 
-    def look_even(self, event):
+    def lookplat_even(self, event):
         event.Skip()
         link = linkType(None)
         link.Show()
+
+    def lookfile_even(self, event):
+        if path.exists(getcwd()+'\\下载目录') == False:
+            mkdir(getcwd()+'\\下载目录')
+        system('explorer '+getcwd()+'\\下载目录')
 
     def __del__(self):
         pass
