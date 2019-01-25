@@ -9,10 +9,11 @@
     |- gui                    打包完成的gui 
     |- support                一些支持
         |- ffmpeg             视屏处理
-        |- aria2c             多线程下载 
+        |- aria2c_win64       多进程下载工具（64位）
+        |- aria2c_win32       32位       
 
 ####  提示
-    为了一劳永逸，可以将ffmpeg和aria2c添加到环境变量
+    为了一劳永逸，可以将ffmpeg和aria2c添加到环境变量（aria2c依照自己电脑配置添加一个即可）
 
 #### 下面是两种下载工具的参数
 
