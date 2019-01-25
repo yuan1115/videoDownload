@@ -2,7 +2,7 @@
 # @Author: jmx
 # @Date:   2018-12-21 09:15:03
 # @Last Modified by:   jmx
-# @Last Modified time: 2019-01-08 14:50:39
+# @Last Modified time: 2019-01-25 09:56:20
 import os
 import re
 import time
@@ -147,6 +147,7 @@ class videoDownload(email):
     OutFormatNum = 0  # 选择的
     formatType = ['1.按照标题', '2.按照id', '3.按照url', '4.标题加id']
     OutFormat = '%(title)s.%(ext)s'
+    # 支持的url格式
     __youtubeDlSUp = [
         'https://www.laola1.tv/en-int/video/stimmen-sv-kapfenberg-sturm-graz-len',
         'https://v.youku.com/v_show/id_XMzc5MzgzMzk2OA==.html'
