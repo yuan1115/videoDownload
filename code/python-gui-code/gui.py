@@ -2,7 +2,7 @@
 # @Author: jmx
 # @Date:   2019-01-08 17:45:36
 # @Last Modified by:   jmx
-# @Last Modified time: 2019-01-25 13:34:09
+# @Last Modified time: 2019-02-15 13:30:53
 # -*- coding: utf-8 -*-
 
 ###########################################################################
@@ -76,46 +76,46 @@ class mainFrame (wx.Frame):
             self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL | wx.LI_VERTICAL)
         selebSizer.Add(self.m_staticline3, 0, wx.EXPAND | wx.ALL, 5)
 
-        self.seleSize_checkBox = wx.CheckBox(
-            self, wx.ID_ANY, u"按照文件大小筛选：", wx.DefaultPosition, wx.DefaultSize, 0)
-        selebSizer.Add(self.seleSize_checkBox, 0, wx.ALL, 5)
+        # self.seleSize_checkBox = wx.CheckBox(
+        #     self, wx.ID_ANY, u"按照文件大小筛选：", wx.DefaultPosition, wx.DefaultSize, 0)
+        # selebSizer.Add(self.seleSize_checkBox, 0, wx.ALL, 5)
 
-        self.limitSize_textCtrl = wx.TextCtrl(
-            self, wx.ID_ANY, u"100", wx.DefaultPosition, wx.Size(40, -1), wx.TE_CENTRE)
-        selebSizer.Add(self.limitSize_textCtrl, 0, 0, 5)
+        # self.limitSize_textCtrl = wx.TextCtrl(
+        #     self, wx.ID_ANY, u"100", wx.DefaultPosition, wx.Size(40, -1), wx.TE_CENTRE)
+        # selebSizer.Add(self.limitSize_textCtrl, 0, 0, 5)
 
-        self.du_staticText = wx.StaticText(
-            self, wx.ID_ANY, u"M", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.du_staticText.Wrap(-1)
-        selebSizer.Add(self.du_staticText, 0, wx.ALL, 5)
+        # self.du_staticText = wx.StaticText(
+        #     self, wx.ID_ANY, u"M", wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.du_staticText.Wrap(-1)
+        # selebSizer.Add(self.du_staticText, 0, wx.ALL, 5)
 
         actionbSizer.Add(selebSizer, 0, wx.ALL | wx.EXPAND, 5)
 
         threadbSizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.open_checkBox = wx.CheckBox(
-            self, wx.ID_ANY, u"多进程下载", wx.DefaultPosition, wx.DefaultSize, 0)
-        threadbSizer.Add(self.open_checkBox, 0, wx.ALL, 5)
+        # self.open_checkBox = wx.CheckBox(
+        #     self, wx.ID_ANY, u"多进程下载", wx.DefaultPosition, wx.DefaultSize, 0)
+        # threadbSizer.Add(self.open_checkBox, 0, wx.ALL, 5)
 
-        self.thread_staticText = wx.StaticText(
-            self, wx.ID_ANY, u"进程数：", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.thread_staticText.Wrap(-1)
-        threadbSizer.Add(self.thread_staticText, 0, wx.ALL, 5)
+        # self.thread_staticText = wx.StaticText(
+        #     self, wx.ID_ANY, u"进程数：", wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.thread_staticText.Wrap(-1)
+        # threadbSizer.Add(self.thread_staticText, 0, wx.ALL, 5)
 
-        self.m_textCtrl41 = wx.TextCtrl(
-            self, wx.ID_ANY, u"4", wx.DefaultPosition, wx.Size(40, -1), wx.TE_CENTRE)
-        self.m_textCtrl41.SetMaxLength(2)
-        threadbSizer.Add(self.m_textCtrl41, 0, 0, 5)
+        # self.m_textCtrl41 = wx.TextCtrl(
+        #     self, wx.ID_ANY, u"4", wx.DefaultPosition, wx.Size(40, -1), wx.TE_CENTRE)
+        # self.m_textCtrl41.SetMaxLength(2)
+        # threadbSizer.Add(self.m_textCtrl41, 0, 0, 5)
 
-        self.du_staticText = wx.StaticText(
-            self, wx.ID_ANY, u"个", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.du_staticText.Wrap(-1)
-        threadbSizer.Add(self.du_staticText, 0, wx.ALL, 5)
+        # self.du_staticText = wx.StaticText(
+        #     self, wx.ID_ANY, u"个", wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.du_staticText.Wrap(-1)
+        # threadbSizer.Add(self.du_staticText, 0, wx.ALL, 5)
 
-        self.m_staticText6 = wx.StaticText(
-            self, wx.ID_ANY, u"（最多填16）", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.m_staticText6.Wrap(-1)
-        threadbSizer.Add(self.m_staticText6, 0, wx.ALL, 5)
+        # self.m_staticText6 = wx.StaticText(
+        #     self, wx.ID_ANY, u"（最多填16）", wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.m_staticText6.Wrap(-1)
+        # threadbSizer.Add(self.m_staticText6, 0, wx.ALL, 5)
 
         actionbSizer.Add(threadbSizer, 0, wx.ALL | wx.EXPAND, 5)
 
@@ -140,7 +140,7 @@ class mainFrame (wx.Frame):
         linkbSizer.Add(self.tips_staticText, 0, wx.ALL, 5)
 
         self.link_textCtrl = wx.TextCtrl(
-            self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(-1, 350), 0)
+            self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(-1, 350), style=wx.HSCROLL | wx.TE_MULTILINE)
         linkbSizer.Add(self.link_textCtrl, 0, wx.ALL | wx.EXPAND, 5)
 
         link_bSizer.Add(linkbSizer, 5, wx.EXPAND, 5)
@@ -170,12 +170,12 @@ class mainFrame (wx.Frame):
         self.SetSizer(mainbSizer)
         self.Layout()
         self.statusbar = self.CreateStatusBar()
-        self.statusbar.SetFieldsCount(3)
-        self.statusbar.SetStatusWidths([-1, -3, -1])
+        self.statusbar.SetFieldsCount(4)
+        self.statusbar.SetStatusWidths([-1, -4, -2, -2])
         self.statusbar.SetStatusText(u'欢迎使用', 0)
         self.statusbar.SetStatusText(
             u'项目地址：https://github.com/yuan1115/videoDownload', 1)
-        self.statusbar.SetStatusText(u'总进度：0%', 2)
+        self.statusbar.SetStatusText(u'总进度：0', 3)
 
         self.Centre(wx.BOTH)
 
